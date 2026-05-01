@@ -1,23 +1,23 @@
-import courses from '../../../../public/courses.json';
-import { notFound, redirect } from 'next/navigation';
-import { headers } from 'next/headers';
-import CourseHero from '@/components/course/CourseHero';
-import CourseContent from '@/components/course/CourseContent';
-import CourseSidebar from '@/components/course/CourseSidebar';
+import courses from "../../../../public/courses.json";
+import { notFound, redirect } from "next/navigation";
+import { headers } from "next/headers";
+import CourseHero from "@/components/course/CourseHero";
+import CourseContent from "@/components/course/CourseContent";
+import CourseSidebar from "@/components/course/CourseSidebar";
 
 export default async function CourseDetailsPage({ params }) {
   const headerData = await headers();
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/auth/get-session`,
+    `${process.env.BETTER_AUTH_URL || "http://localhost:3000"}/api/auth/get-session`,
     {
-      headers: { cookie: headerData.get('cookie') || '' },
+      headers: { cookie: headerData.get("cookie") || "" },
     },
   );
 
   const session = await res.json();
 
   if (!session) {
-    redirect('/login');
+    redirect("/login");
   }
 
   const resolvedParams = await params;

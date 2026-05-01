@@ -5,7 +5,7 @@ import UpdateProfileForm from '@/components/UpdateProfileForm';
 export default async function UpdateProfilePage() {
   const headerData = await headers();
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/auth/get-session`,
+    `${process.env.BETTER_AUTH_URL || 'http://localhost:3000'}/api/auth/get-session`,
     {
       headers: { cookie: headerData.get('cookie') || '' },
     },
