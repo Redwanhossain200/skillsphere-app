@@ -1,18 +1,12 @@
 import { headers } from 'next/headers';
-
 import Link from 'next/link';
 import { LuUser, LuMail, LuCalendar, LuPencil } from 'react-icons/lu';
+import { auth } from '@/lib/auth';
 
 export default async function ProfilePage() {
-  const headerData = await headers();
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/auth/get-session`,
-    {
-      headers: { cookie: headerData.get('cookie') || '' },
-    },
-  );
-
-  const session = await res.json();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   if (!session || !session.user) {
     return (
