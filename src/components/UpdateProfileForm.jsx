@@ -95,7 +95,7 @@ export default function UpdateProfileForm({ user }) {
                 whileHover={{ x: -4 }}
                 whileTap={{ scale: 0.95 }}
                 type="button"
-                className="btn btn-ghost border-base-300 hover:bg-base-200 flex-1 rounded-xl order-2 sm:order-1 font-semibold group"
+                className="btn btn-ghost border-base-300 hover:bg-base-200 py-2 md:py-6 md:px-2 flex-1 rounded-xl order-2 sm:order-1 font-semibold group"
                 onClick={() => router.push('/profile')}
                 disabled={loading}>
                 <FaArrowLeftLong
@@ -109,7 +109,7 @@ export default function UpdateProfileForm({ user }) {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="btn btn-primary flex-2 shadow-lg shadow-primary/20 rounded-xl order-1 sm:order-2 font-bold relative"
+                className="btn btn-primary flex-2 shadow-lg shadow-primary/20 rounded-xl py-2 md:py-6 md:px-2 order-1 sm:order-2 font-bold relative"
                 disabled={loading || !name.trim()}>
                 <AnimatePresence mode="wait">
                   {loading ? (
