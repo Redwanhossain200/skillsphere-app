@@ -58,7 +58,7 @@ export default function UpdateProfileForm({ user }) {
                 Update Information
               </h2>
               <p className="text-base-content/60 font-medium text-xs sm:text-base">
-                Update your personal details to keep your profile fresh.
+                Update your personal detail to keep your profile fresh.
               </p>
             </div>
 
