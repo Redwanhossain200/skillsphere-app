@@ -6,6 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
 import GoogleLoginButton from "@/components/auth/GoogleLoginButton";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,11 +30,11 @@ const RegisterPage = () => {
     });
 
     if (error) {
-      alert(error.message);
+      toast.error(error.message || "Registration failed");
     } else {
-      alert("SignUp Successful");
+      await authClient.signOut();
+      toast.success("Account created successfully! Please login.");
       router.push("/login");
-      router.refresh();
     }
   };
 
