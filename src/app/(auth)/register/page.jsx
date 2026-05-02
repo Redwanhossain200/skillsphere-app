@@ -1,11 +1,11 @@
-'use client';
-import { authClient } from '@/lib/auth-client';
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import Link from 'next/link';
-import GoogleLoginButton from '@/components/auth/GoogleLoginButton';
-import { useRouter } from 'next/navigation';
+"use client";
+import { authClient } from "@/lib/auth-client";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Link from "next/link";
+import GoogleLoginButton from "@/components/auth/GoogleLoginButton";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,14 +25,14 @@ const RegisterPage = () => {
       email: email,
       password: password,
       image: photo,
-      callbackURL: '/',
+      callbackURL: "/",
     });
 
     if (error) {
       alert(error.message);
     } else {
-      alert('SignUp Successful');
-      router.push('/login');
+      alert("SignUp Successful");
+      router.push("/login");
       router.refresh();
     }
   };
@@ -49,7 +49,8 @@ const RegisterPage = () => {
 
           <form
             className="space-y-5"
-            onSubmit={handleSubmit(handleRegisterFunc)}>
+            onSubmit={handleSubmit(handleRegisterFunc)}
+          >
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-semibold text-base">
@@ -60,7 +61,7 @@ const RegisterPage = () => {
                 type="text"
                 placeholder="Enter your name"
                 className="input input-bordered w-full focus:outline-none focus:border-primary transition-colors"
-                {...register('name', { required: 'Name field is required' })}
+                {...register("name", { required: "Name field is required" })}
               />
               {errors.name && (
                 <p className="text-error text-sm mt-1">{errors.name.message}</p>
@@ -77,7 +78,7 @@ const RegisterPage = () => {
                 type="text"
                 placeholder="Enter your photo"
                 className="input input-bordered w-full focus:outline-none focus:border-primary transition-colors"
-                {...register('photo', { required: 'Photo field is required' })}
+                {...register("photo", { required: "Photo field is required" })}
               />
               {errors.photo && (
                 <p className="text-error text-sm mt-1">
@@ -96,7 +97,7 @@ const RegisterPage = () => {
                 type="email"
                 placeholder="Enter your email address"
                 className="input input-bordered w-full focus:outline-none focus:border-primary transition-colors"
-                {...register('email', { required: 'Email field is required' })}
+                {...register("email", { required: "Email field is required" })}
               />
               {errors.email && (
                 <p className="text-error text-sm mt-1">
@@ -113,17 +114,18 @@ const RegisterPage = () => {
               </label>
               <div className="relative">
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   className="input input-bordered w-full pr-12 focus:outline-none focus:border-primary transition-colors"
-                  {...register('password', {
-                    required: 'Password field is required',
+                  {...register("password", {
+                    required: "Password field is required",
                   })}
                 />
                 <button
                   type="button"
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-base-content/60 hover:text-base-content"
-                  onClick={() => setShowPassword(!showPassword)}>
+                  onClick={() => setShowPassword(!showPassword)}
+                >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
@@ -144,7 +146,7 @@ const RegisterPage = () => {
           <GoogleLoginButton />
 
           <p className="mt-6 text-center font-medium text-base-content/70">
-            Already Have An Account?{' '}
+            Already Have An Account?{" "}
             <Link href="/login" className="text-primary hover:underline">
               Login
             </Link>

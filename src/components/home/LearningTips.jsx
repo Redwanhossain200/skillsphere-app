@@ -20,88 +20,63 @@ export default function LearningTips() {
   ];
 
   return (
-    <section className="bg-base-200 py-16">
+    <section className="bg-base-200 py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}>
-            <h2 className="text-xl md:text-2xl font-bold mb-6">
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold mb-8 text-base-content">
               Effective Learning Tips
             </h2>
 
-            <motion.div
-              variants={{
-                hidden: {},
-                show: {
-                  transition: {
-                    staggerChildren: 0.15,
-                  },
-                },
-              }}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="space-y-4 text-sm md:text-lg">
+            <div className="space-y-4">
               {tips.map((tip, idx) => (
                 <motion.div
                   key={idx}
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    show: {
-                      opacity: 1,
-                      y: 0,
-                      transition: {
-                        duration: 0.4,
-                        ease: 'easeOut',
-                      },
-                    },
-                  }}
-                  whileHover={{
-                    scale: 1.03,
-                  }}
-                  className="flex gap-3 items-start bg-base-100 p-4 rounded-xl shadow-sm border border-transparent hover:border-primary/30 hover:shadow-md transition-all duration-300">
-                  <LuCircleCheck className="text-success mt-1 shrink-0" />
-                  <p>
-                    <strong>{tip.title}:</strong> {tip.desc}
+                  whileHover={{ x: 10 }}
+                  className="flex gap-4 items-start bg-base-100 p-5 rounded-2xl shadow-sm border border-transparent hover:border-primary/30 hover:shadow-md transition-all cursor-default group"
+                >
+                  <LuCircleCheck className="text-success mt-1 shrink-0 group-hover:scale-125 transition-transform" />
+                  <p className="text-base-content/80 group-hover:text-base-content">
+                    <strong className="text-primary">{tip.title}:</strong> {tip.desc}
                   </p>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <motion.div
-              whileHover={{ y: -5, scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="stat bg-base-100 rounded-xl shadow-md border border-base-300 hover:shadow-lg transition-all">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <motion.div 
+              whileHover={{ y: -10, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="stat bg-base-100 rounded-2xl shadow-xl border border-base-300 p-8"
+            >
               <div className="stat-figure text-primary">
-                <LuBookOpen size={48} />
+                <LuBookOpen size={48} className="opacity-80 group-hover:opacity-100" />
               </div>
-              <div className="stat-title font-semibold">Courses</div>
+              <div className="stat-title font-bold text-base-content/70">Courses</div>
               <div className="stat-value text-primary">100+</div>
               <div className="stat-desc">Available for you</div>
             </motion.div>
 
-            <motion.div
-              whileHover={{ y: -5, scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="stat bg-base-100 rounded-xl shadow-md border border-base-300 hover:shadow-lg transition-all">
+            <motion.div 
+              whileHover={{ y: -10, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="stat bg-base-100 rounded-2xl shadow-xl border border-base-300 p-8"
+            >
               <div className="stat-figure text-secondary">
-                <LuUsers size={48} />
+                <LuUsers size={48} className="opacity-80" />
               </div>
-              <div className="stat-title font-semibold">Students</div>
+              <div className="stat-title font-bold text-base-content/70">Students</div>
               <div className="stat-value text-secondary">50k+</div>
               <div className="stat-desc">Learning actively</div>
             </motion.div>
-          </motion.div>
+          </div>
+
         </div>
       </div>
     </section>

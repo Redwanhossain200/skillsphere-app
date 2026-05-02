@@ -1,11 +1,11 @@
-'use client';
-import { authClient } from '@/lib/auth-client';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import GoogleLoginButton from '@/components/auth/GoogleLoginButton';
-import { useRouter } from 'next/navigation';
+"use client";
+import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import GoogleLoginButton from "@/components/auth/GoogleLoginButton";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,14 +22,14 @@ const LoginPage = () => {
       email: data.email,
       password: data.password,
       rememberMe: true,
-      callbackURL: '/',
+      callbackURL: "/",
     });
 
     if (error) {
       alert(error.message);
     } else {
-      alert('SignIn Successful');
-      router.push('/');
+      alert("SignIn Successful");
+      router.push("/");
       router.refresh();
     }
   };
@@ -55,7 +55,7 @@ const LoginPage = () => {
                 type="email"
                 placeholder="Enter your email address"
                 className="input input-bordered w-full focus:outline-none focus:border-primary transition-colors"
-                {...register('email', { required: 'Email field is required' })}
+                {...register("email", { required: "Email field is required" })}
               />
               {errors.email && (
                 <p className="text-error text-sm mt-1">
@@ -72,17 +72,18 @@ const LoginPage = () => {
               </label>
               <div className="relative">
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   className="input input-bordered w-full pr-12 focus:outline-none focus:border-primary transition-colors"
-                  {...register('password', {
-                    required: 'Password field is required',
+                  {...register("password", {
+                    required: "Password field is required",
                   })}
                 />
                 <button
                   type="button"
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-base-content/60 hover:text-base-content"
-                  onClick={() => setShowPassword(!showPassword)}>
+                  onClick={() => setShowPassword(!showPassword)}
+                >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
@@ -103,7 +104,7 @@ const LoginPage = () => {
           <GoogleLoginButton />
 
           <p className="mt-6 text-center font-medium text-base-content/70">
-            Don't Have An Account?{' '}
+            Don't Have An Account?{" "}
             <Link href="/register" className="text-primary hover:underline">
               Register
             </Link>

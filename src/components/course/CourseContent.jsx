@@ -1,4 +1,4 @@
-import { LuCircleCheck } from 'react-icons/lu';
+import { LuCircleCheck } from "react-icons/lu";
 
 export default function CourseContent({ course }) {
   return (

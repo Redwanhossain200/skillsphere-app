@@ -11,19 +11,18 @@ export default function CoursesPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCourses = async () => {
+    async function getCourses() {
       try {
-        const response = await fetch('/courses.json');
-        const data = await response.json();
+        const res = await fetch('/courses.json');
+        const data = await res.json();
         setCourses(data);
-      } catch (error) {
-        console.error('Failed to fetch courses', error);
+      } catch (err) {
+        console.error(err);
       } finally {
-        setTimeout(() => setIsLoading(false), 600);
+        setIsLoading(false);
       }
-    };
-
-    fetchCourses();
+    }
+    getCourses();
   }, []);
 
   const filteredCourses = courses.filter((course) =>

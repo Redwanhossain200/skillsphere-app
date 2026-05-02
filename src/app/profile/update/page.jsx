@@ -1,19 +1,14 @@
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import UpdateProfileForm from '@/components/UpdateProfileForm';
+import { auth } from '@/lib/auth';
 
 export default async function UpdateProfilePage() {
-  const headerData = await headers();
-  const res = await fetch(
-    `${process.env.BETTER_AUTH_URL || 'http://localhost:3000'}/api/auth/get-session`,
-    {
-      headers: { cookie: headerData.get('cookie') || '' },
-    },
-  );
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
-  const session = await res.json();
-
-  if (!session) {
+  if (!session?.user) {
     redirect('/login');
   }
 

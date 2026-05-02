@@ -1,28 +1,23 @@
 import courses from "../../../../public/courses.json";
 import { notFound, redirect } from "next/navigation";
 import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 import CourseHero from "@/components/course/CourseHero";
 import CourseContent from "@/components/course/CourseContent";
 import CourseSidebar from "@/components/course/CourseSidebar";
 
 export default async function CourseDetailsPage({ params }) {
-  const headerData = await headers();
-  const res = await fetch(
-    `${process.env.BETTER_AUTH_URL || "http://localhost:3000"}/api/auth/get-session`,
-    {
-      headers: { cookie: headerData.get("cookie") || "" },
-    },
-  );
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
-  const session = await res.json();
-
-  if (!session) {
+  if (!session || !session.user) {
     redirect("/login");
   }
 
-  const resolvedParams = await params;
-  const courseId = parseInt(resolvedParams.id);
-  const course = courses.find((c) => c.id === courseId);
+  const { id } = await params;
+  const courseId = parseInt(id);
+  const course = courses.find((item) => item.id === courseId);
 
   if (!course) {
     notFound();

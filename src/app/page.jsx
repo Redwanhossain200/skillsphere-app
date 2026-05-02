@@ -12,19 +12,18 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCourses = async () => {
+    async function getCourses() {
       try {
-        const response = await fetch('/courses.json');
-        const data = await response.json();
+        const res = await fetch('/courses.json');
+        const data = await res.json();
         setCourses(data);
-      } catch (error) {
-        console.error('Failed to fetch courses', error);
+      } catch (err) {
+        console.error(err);
       } finally {
-        setTimeout(() => setIsLoading(false), 600);
+        setIsLoading(false);
       }
-    };
-
-    fetchCourses();
+    }
+    getCourses();
   }, []);
 
   const topRatedCourses = [...courses]
@@ -34,7 +33,7 @@ export default function Home() {
   const trendingCourses = courses.filter((c) => c.isTrending).slice(0, 3);
 
   return (
-    <div className="flex flex-col gap-16 pb-16 overflow-hidden">
+    <div className="flex flex-col gap-6 pb-16 overflow-hidden">
       <HeroSection />
       <PopularCourses popularCourses={topRatedCourses} isLoading={isLoading} />
       <TrendingCourses

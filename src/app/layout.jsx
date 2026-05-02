@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ToastProvider from '@/components/ToastProvider';
+import { auth } from '@/lib/auth';
 
 const poppins = Poppins({
   weight: ['300', '400', '500', '600', '700'],
@@ -20,20 +21,9 @@ export const metadata = {
 import { CartProvider } from '@/context/CartContext';
 
 export default async function RootLayout({ children }) {
-  let session = null;
-  try {
-    const headerData = await headers();
-    const res = await fetch(
-      `${process.env.BETTER_AUTH_URL || 'http://localhost:3000'}/api/auth/get-session`,
-      {
-        headers: { cookie: headerData.get('cookie') || '' },
-      },
-    );
-    if (res.ok) {
-      session = await res.json();
-      if (!session?.user) session = null;
-    }
-  } catch (error) {}
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   return (
     <html

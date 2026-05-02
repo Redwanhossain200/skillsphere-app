@@ -10,14 +10,12 @@ export async function proxy(request) {
       request.nextUrl.pathname.length > 9);
 
   try {
-    const response = await fetch(
-      `${request.nextUrl.origin}/api/auth/get-session`,
-      {
-        headers: {
-          cookie: request.headers.get('cookie') || '',
-        },
+    const url = process.env.BETTER_AUTH_URL || 'http://localhost:3000';
+    const response = await fetch(`${url}/api/auth/get-session`, {
+      headers: {
+        cookie: request.headers.get('cookie') || '',
       },
-    );
+    });
 
     const session = await response.json();
 

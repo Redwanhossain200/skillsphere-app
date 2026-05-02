@@ -27,6 +27,14 @@ export default async function ProfilePage() {
 
   const { user } = session;
 
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  };
+
   return (
     <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8 bg-base-200/30">
       <div className="w-full max-w-xl bg-base-100 rounded-3xl shadow-xl border border-base-200 overflow-hidden transition-all hover:shadow-2xl">
@@ -51,7 +59,8 @@ export default async function ProfilePage() {
 
             <Link
               href="/profile/update"
-              className="btn btn-sm btn-primary rounded-full px-5 shadow-md gap-2 mb-2 hover:scale-105 transition-transform">
+              className="btn btn-sm btn-primary rounded-full px-5 shadow-md gap-2 mb-2 hover:scale-105 transition-transform"
+            >
               <LuPencil size={14} /> Update
             </Link>
           </div>
@@ -79,11 +88,7 @@ export default async function ProfilePage() {
                 Member Since
               </span>
               <span className="font-semibold italic text-base-content/80">
-                {new Date(user.createdAt).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })}
+                {formatDate(user.createdAt)}
               </span>
             </div>
 
@@ -92,7 +97,8 @@ export default async function ProfilePage() {
                 Verification Status
               </span>
               <span
-                className={`badge ${user.emailVerified ? 'badge-success' : 'badge-warning'} badge-md font-bold py-3`}>
+                className={`badge ${user.emailVerified ? 'badge-success' : 'badge-warning'} badge-md font-bold py-3`}
+              >
                 {user.emailVerified ? 'Verified' : 'Pending'}
               </span>
             </div>
